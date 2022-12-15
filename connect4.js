@@ -18,14 +18,22 @@ let players = [PLAYER_BLUE, PLAYER_RED]
 //TODO - Undobutton
 function undo() {
     if (stateSeq.length > 0) {
-        state = stateSeq.pop()
-
-
-        // let chip = elt("div", {class: `${state.activePlayer} piece`})
-        // console.log(chip)
-        // document.getElementById(`${row}${col}`).append(chip)
-        // switchPlayer()
-        // checkWinner()
+        let stateBefore = stateSeq.pop()
+        let row = 5;
+        let col = 6;
+        for (let i = 0; i<7; i++){
+            for (let j = 0; j<6; j++){
+                console.log(stateBefore.board[j][i]);
+                if (stateBefore.board[j][i]!==state.board[j][i]){
+                    row = i;
+                    col = j;
+                }
+            }
+        }
+        let chip = elt("div", {class: `${state.activePlayer} piece`})
+        console.log(chip)
+        document.getElementById(`${row}${col}`).remove()
+        switchPlayer()
     }
 }
 
