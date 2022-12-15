@@ -13,7 +13,7 @@
       gameOver: false
     }
 
-    let players       = [PLAYER_BLUE, PLAYER_RED]
+    let players  = [PLAYER_BLUE, PLAYER_RED]
 
     //TODO - Undobutton
     //TODO - Die Komponentenlogik von SUIWEB
