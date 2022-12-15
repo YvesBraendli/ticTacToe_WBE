@@ -17,15 +17,6 @@
 
     //TODO - Undobutton
     //TODO - Die Komponentenlogik von SUIWEB
-   //const App = () => [Board, {board: state.board}] 
-   // const Board = ({board}) => {
-  //    let flatBoard = [].concat(...board)
-   //   let fields = flatBoard.map((type) => [Field, {type}])
-   //   return (["div", {className: "board"}, ...fields])
-   // }
-   // const Field = ({type}) => {
-   //   ...
-   // }
     
 
     //Entry Point - loading the board - called from HTML file
