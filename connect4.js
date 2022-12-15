@@ -12,10 +12,25 @@
       activePlayer: PLAYER_BLUE,
       gameOver: false
     }
+    let stateSeq = []
 
     let players  = [PLAYER_BLUE, PLAYER_RED]
 
     //TODO - Undobutton
+    function undo() {
+        if (stateSeq.length > 0) {
+            state = stateSeq.pop()
+            document.getElementById('winnerMsg').innerHTML = ""
+        }
+    }
+
+    const setInObj = (obj, attr, val) => {
+        let newObj = {}
+        newObj[attr] = val
+        return {...obj,
+            ...newObj
+        }
+    }
     //TODO - Die Komponentenlogik von SUIWEB
     
 
@@ -165,6 +180,7 @@
     function clickOnField(row, col) {
       //console.log(`field r${row}-c${col} was clicked`);
 
+        stateSeq.push(state)
       //TODO variable soll gesetzt werden, wenn ein sieger ermittelt wurde
       if (state.gameOver) {
         return;
@@ -174,7 +190,7 @@
       if(state.board[0][col] !== ''){
         alert("Ups, hier passt kein Stein mehr rein!");
         return;
-      } 
+      }
 
       // EDIT caller row to next free row, so we can stack the coins
       //console.log(`row = ${row} to start finding next free row`)
