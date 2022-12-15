@@ -78,7 +78,7 @@
         ["div", {class:"field", id:"55", onClick:"clickOnField(5,5)"}],
         ["div", {class:"field", id:"56", onClick:"clickOnField(5,6)"}], 
       ]
-      renderSJDON(element, appRoot)
+      //renderSJDON(element, appRoot)
 
       switchPlayer() // just to set the subtitle of current player
     }
