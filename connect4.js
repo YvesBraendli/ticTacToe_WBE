@@ -19,8 +19,18 @@ let players = [PLAYER_BLUE, PLAYER_RED]
 function undo() {
     if (stateSeq.length > 0) {
         state = stateSeq.pop()
-        document.getElementById('winnerMsg').innerHTML = ""
+
+
+        // let chip = elt("div", {class: `${state.activePlayer} piece`})
+        // console.log(chip)
+        // document.getElementById(`${row}${col}`).append(chip)
+        // switchPlayer()
+        // checkWinner()
     }
+}
+
+const setInList = (lst, idx, val) => {
+    return [...lst.slice(0, idx), val, ...lst.slice(idx + 1)]
 }
 
 const setInObj = (obj, attr, val) => {
@@ -236,8 +246,11 @@ function clickOnField(row, col) {
     }
 
     // EDIT the board state with the players color
-    state.board[row][col] = state.activePlayer
+    //state.board[row][col] = state.activePlayer
 
+
+    // Code for setting new state without affecting old state
+    state = setInObj(state, "board", setInList(state.board, row, setInList(state.board[row], col % 7, state.activePlayer)))
 
     // CREATE new chip element and add it to the HTML
     let chip = elt("div", {class: `${state.activePlayer} piece`})
