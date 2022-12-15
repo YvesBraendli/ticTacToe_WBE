@@ -1,0 +1,15 @@
+{
+  "name": "expresso",
+  "version": "1.0.0",
+  "description": "Express Demo Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "your name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
