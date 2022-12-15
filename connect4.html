@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vier gewinnt</title>
+  <script src="connect4.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+  <h1>Vier gewinnt</h1>
+  <h2 id="subTitle"></h2>
+  <div class="controls">
+    <button id=newGame onClick="newGame()">Neues Spiel</button>
+    <button onclick="loadState()">Laden vom Server</button>
+    <button onclick="saveState()">Speichern auf Server</button>
+    <button onclick="loadStateCache()">Laden</button>
+    <button onclick="saveStateCache()">Speichern</button>
+  </div>
+  <div style="height: 40px;"></div>
+
+  <script>
+    showBoard()
+  </script>
+</body>
+</html>
