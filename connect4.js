@@ -15,6 +15,8 @@
 
     let players       = [PLAYER_BLUE, PLAYER_RED]
 
+    //TODO - Undobutton
+    //TODO - Die Komponentenlogik von SUIWEB
     const App = () => [Board, {board: state.board}] 
     const Board = ({board}) => {
       let flatBoard = [].concat(...board)
@@ -28,7 +30,7 @@
 
     //Entry Point - loading the board - called from HTML file
     function showBoard() {
-      //generateBoard()
+      generateBoard()
       
       let appRoot = document.body;
       let element =
