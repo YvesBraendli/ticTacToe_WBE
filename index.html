@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Vier gewinnt</title>
-  <script src="./connect4.js"></script>
   <link rel="stylesheet" href="./style.css">
-  <script src="suiweb.js"></script>
+
 </head>
 
 
@@ -13,18 +12,19 @@
   <h1>Vier gewinnt</h1>
   <h2 id="subTitle"></h2>
   <div class="controls">
-    <button id=newGame onClick="newGame()">Neues Spiel</button>
-    <button onclick="loadState()">Laden vom Server</button>
-    <button onclick="saveState()">Speichern auf Server</button>
-    <button onclick="loadStateCache()">Laden</button>
-    <button onclick="saveStateCache()">Speichern</button>
-    <button onclick="undo()">Undo</button>
+    <button id=newGame>Neues Spiel</button>
+    <button id=loadServer>Laden vom Server</button>
+    <button id=saveServer>Speichern auf Server</button>
+    <button id=loadLocal>Laden</button>
+    <button id=saveLocal>Speichern</button>
+    <button id=undo>Undo</button>
   </div>
   <div style="height: 40px;"></div>
-  <div class="board", id="board"></div>
+  <div class="app", id="app"></div>
 
-  <script>
-    showBoard()
+  <script type="module">
+    import { launch } from './main.js'
+    launch()
   </script>
 </body>
 </html>
