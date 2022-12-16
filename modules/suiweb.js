@@ -327,7 +327,7 @@ function setFocusInput(selector, position) {
  * =====================================================================
 */
 
-//export { render, createElement, useState, useEffect };
+export { render, createElement, useState, useEffect };
 
 
 /* =====================================================================
