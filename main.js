@@ -20,9 +20,7 @@ let players = [PLAYER_BLUE, PLAYER_RED]
 
 function undo() {
     if (stateSeq.length > 0) {
-        console.log(state)
         state = stateSeq.pop()
-        console.log(state)
         updateBoard()
         updatePlayerTitle() // just to set the subtitle of current player
     }
@@ -45,11 +43,9 @@ const setInObj = (obj, attr, val) => {
 const App = () => [Board, { board: state.board }]
 
 const Board = ({ board }) => {
-    //console.log(board)
     let fields = []
     for(var r = 0; r < board.length; r++) {
         for(var c = 0; c < board[r].length; c++) {
-            //console.log("new field at " + r + c)
             var type = state.board[r][c]
             fields.push([Field, { type, r, c }])
         }
@@ -63,30 +59,24 @@ const Field = ({ type, r, c }) => {
 
     const hasPiece = !!type
     if (hasPiece) {
-        //console.log("this field has a piece with the color " + type + " => " + )
         var piece = ["div", {
             className: `piece ${type}`
         }]
-        //console.log("new piece = " + piece)
         return ["div", { className: `field`, id: `${r}${c}`}, piece]
     } 
     return ["div", { className: `field`, id: `${r}${c}`}]
 }
 
 function color(type){
-    //console.log("checking color...")
     switch (type) {
         case 'r':
-            //console.log("Rot")
             return 'Rot'
         case 'b':
-            //console.log("Blau")
             return 'Blau'
     }
 }
 
 export function launch(){
-    //console.log("launch game and adding listeners to buttons...")
 
     document.getElementById('newGame').onclick = newGame
     document.getElementById('loadServer').onclick = loadGame
@@ -142,14 +132,14 @@ function updateBoard() {
 
 
 function clickOnField(row, col) {
-    //console.log(`field r${row}-c${col} was clicked`);
 
 
-    stateSeq.push(state)
+
     //TODO variable soll gesetzt werden, wenn ein sieger ermittelt wurde
     if (state.gameOver) {
         return;
     }
+    stateSeq.push(state)
 
     // CHECK if current col is already full
     if (state.board[0][col] !== '') {
@@ -158,11 +148,8 @@ function clickOnField(row, col) {
     }
 
     // EDIT caller row to next free row, so we can stack the coins
-    //console.log(`row = ${row} to start finding next free row`)
     for (row = BOARD_ROW - 1; row >= 0; row--) {
-        //console.log(`checking r${row} in c${col} whether it is empty: ${(state[row][col] == '')}`)
         if (state.board[row][col] == '') {
-            //console.log(`next free row at ${row}${col}`);
             break
         }
     }
@@ -179,7 +166,6 @@ function clickOnField(row, col) {
     document.getElementById(`${row}${col}`).append(newPiece)
     switchPlayer()
     checkWinner()
-    console.log(state)
 }
 
 function getPiece(color) {
@@ -250,7 +236,6 @@ function checkWinner() {
 }
 
 function setWinner(r, c) {
-    console.log(`winner is ${state.board[r][c]} at r${r}c${c}`)
     let winner = state.board[r][c];
     if (winner == PLAYER_RED) {
         document.getElementById("subTitle").innerText = "Spieler Rot hat gewonnen!!!";
@@ -296,7 +281,6 @@ function elt(type, attrs, ...children) {
 //  Put current state to server
 //
 function saveState() {
-    console.log("saved state to server...")
     fetch(url + 'api/data/' + datakey + '?api-key=c4game', {
         method: 'PUT',
         headers: {'Content-type': 'application/json'},
@@ -306,24 +290,21 @@ function saveState() {
 
 // load game from server
 function loadGame() {
-    console.log("loaded state from server...")
     fetch(url + 'api/data/' + datakey + '?api-key=c4game')
         .then((response) => response.json())
+        .then((response) => response.json())
         .then((data) => {
-            console.log('got back response:', data)
             state = data
             updateBoard()
         })
 }
 
 function saveStateCache() {
-    console.log("saved state to chache...")
     localStorage.clear()
     localStorage.setItem('state', JSON.stringify(state));
 }
 
 function loadStateCache() {
-    console.log("loaded state from chache...")
     state = JSON.parse(localStorage.getItem('state'));
     updateBoard()
 }
