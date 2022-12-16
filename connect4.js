@@ -41,9 +41,7 @@ const App = () => [Board, {
     board: state.board
 }]
 
-const Board = ({
-                   board
-               }) => {
+const Board = ({ board }) => {
     let flatBoard = [].concat(...board)
     let fields = flatBoard.map((type) => [Field, {
         type
@@ -55,9 +53,7 @@ const Board = ({
     )
 }
 
-const Field = ({
-                   type
-               }) => {
+const Field = ({ type }) => {
     let piece = ""
     if (type != '') {
         piece = ["div", {
@@ -69,69 +65,80 @@ const Field = ({
     }, piece]
 }
 
+const color = (type) => {
+    switch (type) {
+        case 'r':
+            return 'red'
+        case 'b':
+            return 'blue'
+    }
+}
+
 //Entry Point - loading the board - called from HTML file
 function showBoard() {
     generateBoard()
 
-    let appRoot = document.body;
-    let element =
-        ["div", {class: "board", id: "board"},
-            ["div", {class: "field", id: "00", onClick: "clickOnField(0,0)"}],
-            ["div", {class: "field", id: "01", onClick: "clickOnField(0,1)"}],
-            ["div", {class: "field", id: "02", onClick: "clickOnField(0,2)"}],
-            ["div", {class: "field", id: "03", onClick: "clickOnField(0,3)"}],
-            ["div", {class: "field", id: "04", onClick: "clickOnField(0,4)"}],
-            ["div", {class: "field", id: "05", onClick: "clickOnField(0,5)"}],
-            ["div", {class: "field", id: "06", onClick: "clickOnField(0,6)"}],
-            ["div", {class: "field", id: "10", onClick: "clickOnField(1,0)"}],
-            ["div", {class: "field", id: "11", onClick: "clickOnField(1,1)"}],
-            ["div", {class: "field", id: "12", onClick: "clickOnField(1,2)"}],
-            ["div", {class: "field", id: "13", onClick: "clickOnField(1,3)"}],
-            ["div", {class: "field", id: "14", onClick: "clickOnField(1,4)"}],
-            ["div", {class: "field", id: "15", onClick: "clickOnField(1,5)"}],
-            ["div", {class: "field", id: "16", onClick: "clickOnField(1,6)"}],
-            ["div", {class: "field", id: "20", onClick: "clickOnField(2,0)"}],
-            ["div", {class: "field", id: "21", onClick: "clickOnField(2,1)"}],
-            ["div", {class: "field", id: "22", onClick: "clickOnField(2,2)"}],
-            ["div", {class: "field", id: "23", onClick: "clickOnField(2,3)"}],
-            ["div", {class: "field", id: "24", onClick: "clickOnField(2,4)"}],
-            ["div", {class: "field", id: "25", onClick: "clickOnField(2,5)"}],
-            ["div", {class: "field", id: "26", onClick: "clickOnField(2,6)"}],
-            ["div", {class: "field", id: "30", onClick: "clickOnField(3,0)"}],
-            ["div", {class: "field", id: "31", onClick: "clickOnField(3,1)"}],
-            ["div", {class: "field", id: "32", onClick: "clickOnField(3,2)"}],
-            ["div", {class: "field", id: "33", onClick: "clickOnField(3,3)"}],
-            ["div", {class: "field", id: "34", onClick: "clickOnField(3,4)"}],
-            ["div", {class: "field", id: "35", onClick: "clickOnField(3,5)"}],
-            ["div", {class: "field", id: "36", onClick: "clickOnField(3,6)"}],
-            ["div", {class: "field", id: "40", onClick: "clickOnField(4,0)"}],
-            ["div", {class: "field", id: "41", onClick: "clickOnField(4,1)"}],
-            ["div", {class: "field", id: "42", onClick: "clickOnField(4,2)"}],
-            ["div", {class: "field", id: "43", onClick: "clickOnField(4,3)"}],
-            ["div", {class: "field", id: "44", onClick: "clickOnField(4,4)"}],
-            ["div", {class: "field", id: "45", onClick: "clickOnField(4,5)"}],
-            ["div", {class: "field", id: "46", onClick: "clickOnField(4,6)"}],
-            ["div", {class: "field", id: "50", onClick: "clickOnField(5,0)"}],
-            ["div", {class: "field", id: "51", onClick: "clickOnField(5,1)"}],
-            ["div", {class: "field", id: "52", onClick: "clickOnField(5,2)"}],
-            ["div", {class: "field", id: "53", onClick: "clickOnField(5,3)"}],
-            ["div", {class: "field", id: "54", onClick: "clickOnField(5,4)"}],
-            ["div", {class: "field", id: "55", onClick: "clickOnField(5,5)"}],
-            ["div", {class: "field", id: "56", onClick: "clickOnField(5,6)"}],
-        ]
+    // let appRoot = document.body;
+    // let element =
+    //     ["div", {class: "board", id: "board"},
+    //         ["div", {class: "field", id: "00", onClick: "clickOnField(0,0)"}],
+    //         ["div", {class: "field", id: "01", onClick: "clickOnField(0,1)"}],
+    //         ["div", {class: "field", id: "02", onClick: "clickOnField(0,2)"}],
+    //         ["div", {class: "field", id: "03", onClick: "clickOnField(0,3)"}],
+    //         ["div", {class: "field", id: "04", onClick: "clickOnField(0,4)"}],
+    //         ["div", {class: "field", id: "05", onClick: "clickOnField(0,5)"}],
+    //         ["div", {class: "field", id: "06", onClick: "clickOnField(0,6)"}],
+    //         ["div", {class: "field", id: "10", onClick: "clickOnField(1,0)"}],
+    //         ["div", {class: "field", id: "11", onClick: "clickOnField(1,1)"}],
+    //         ["div", {class: "field", id: "12", onClick: "clickOnField(1,2)"}],
+    //         ["div", {class: "field", id: "13", onClick: "clickOnField(1,3)"}],
+    //         ["div", {class: "field", id: "14", onClick: "clickOnField(1,4)"}],
+    //         ["div", {class: "field", id: "15", onClick: "clickOnField(1,5)"}],
+    //         ["div", {class: "field", id: "16", onClick: "clickOnField(1,6)"}],
+    //         ["div", {class: "field", id: "20", onClick: "clickOnField(2,0)"}],
+    //         ["div", {class: "field", id: "21", onClick: "clickOnField(2,1)"}],
+    //         ["div", {class: "field", id: "22", onClick: "clickOnField(2,2)"}],
+    //         ["div", {class: "field", id: "23", onClick: "clickOnField(2,3)"}],
+    //         ["div", {class: "field", id: "24", onClick: "clickOnField(2,4)"}],
+    //         ["div", {class: "field", id: "25", onClick: "clickOnField(2,5)"}],
+    //         ["div", {class: "field", id: "26", onClick: "clickOnField(2,6)"}],
+    //         ["div", {class: "field", id: "30", onClick: "clickOnField(3,0)"}],
+    //         ["div", {class: "field", id: "31", onClick: "clickOnField(3,1)"}],
+    //         ["div", {class: "field", id: "32", onClick: "clickOnField(3,2)"}],
+    //         ["div", {class: "field", id: "33", onClick: "clickOnField(3,3)"}],
+    //         ["div", {class: "field", id: "34", onClick: "clickOnField(3,4)"}],
+    //         ["div", {class: "field", id: "35", onClick: "clickOnField(3,5)"}],
+    //         ["div", {class: "field", id: "36", onClick: "clickOnField(3,6)"}],
+    //         ["div", {class: "field", id: "40", onClick: "clickOnField(4,0)"}],
+    //         ["div", {class: "field", id: "41", onClick: "clickOnField(4,1)"}],
+    //         ["div", {class: "field", id: "42", onClick: "clickOnField(4,2)"}],
+    //         ["div", {class: "field", id: "43", onClick: "clickOnField(4,3)"}],
+    //         ["div", {class: "field", id: "44", onClick: "clickOnField(4,4)"}],
+    //         ["div", {class: "field", id: "45", onClick: "clickOnField(4,5)"}],
+    //         ["div", {class: "field", id: "46", onClick: "clickOnField(4,6)"}],
+    //         ["div", {class: "field", id: "50", onClick: "clickOnField(5,0)"}],
+    //         ["div", {class: "field", id: "51", onClick: "clickOnField(5,1)"}],
+    //         ["div", {class: "field", id: "52", onClick: "clickOnField(5,2)"}],
+    //         ["div", {class: "field", id: "53", onClick: "clickOnField(5,3)"}],
+    //         ["div", {class: "field", id: "54", onClick: "clickOnField(5,4)"}],
+    //         ["div", {class: "field", id: "55", onClick: "clickOnField(5,5)"}],
+    //         ["div", {class: "field", id: "56", onClick: "clickOnField(5,6)"}],
+    //     ]
     //renderSJDON(element, appRoot)
 
     switchPlayer() // just to set the subtitle of current player
 }
 
 const generateBoard = function () {
+    let app = document.querySelector(".app")
+    render([App], app)
     for (let r = 0; r < BOARD_ROW; r++) {
         for (let c = 0; c < BOARD_COL; c++) {
             let field = elt("div", {class: "field", id: `${r}${c}`})
-            field.addEventListener('click', function (event) {
+            app.addEventListener('click', function (event) {
                 clickOnField(r, c)
             })
-            document.getElementById("board").append(field)
+            document.getElementById("board").append(app)
         }
     }
 }
