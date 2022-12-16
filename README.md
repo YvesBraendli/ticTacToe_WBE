@@ -10,5 +10,3 @@ Above the game board it is indicated which player's turn it is and also which pl
 When a winner is determined, the current game can no longer be played, but all buttons are still functional.
 ## Group
 Tristan Kindle and Yves Brändli worked together on this project.
-
-Translated with www.DeepL.com/Translator (free version)
